@@ -31,16 +31,9 @@ app.get('/pedidos/view', (req, res) => {
         }
 
         console.log('Resultados da consulta:', resultados);
-        const pedidos = resultados.map(resultado => {
-            return {
-                resultados
-            };
-        });
-
-        res.json({ pedidos });
+        res.json({ pedidos: resultados });
     });
 });
-
 
 app.get('/pedidos/:id_pedido', (req, res) => {
     const idPedido  = req.params.id_pedido;
@@ -60,6 +53,41 @@ app.get('/pedidos/:id_pedido', (req, res) => {
     });
 });
 
+app.get('/pedidos/view2', (req, res) => {
+    console.log('Estou aqui');
+    const query = 'SELECT * FROM pedidos_detalhes2';
+    connection.query(query, (erro, resultados) => {
+        if (erro) {
+            console.error('Erro ao consultar pedidos:', erro);
+            return res.status(500).json({ error: 'Erro interno do servidor' });
+        }
+        if (resultados.length === 0) {
+            console.log('Nenhum pedido encontrado.');
+            return res.status(404).json({ error: 'Nenhum pedido encontrado.' });
+        }
+
+        console.log('Resultados da consulta:', resultados);
+        res.json({ pedidos: resultados });
+    });
+});
+
+app.get('/pedidos/view3', (req, res) => {
+    console.log('Estou aqui');
+    const query = 'SELECT * FROM vendas_por_cliente';
+    connection.query(query, (erro, resultado) => {
+        if (erro) {
+            console.error('Erro ao consultar pedidos:', erro);
+            res.status(500).json({ error: 'Erro interno do servidor' });
+            return;
+        }
+        console.log('Resultados da consulta:', resultado);
+        res.json({ 
+            pedidos: resultado
+        });
+    });
+});
+
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000');
 });
+

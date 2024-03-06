@@ -55,7 +55,7 @@ app.get('/pedidos/:id_pedido', (req, res) => {
 
 app.get('/pedidos/view2', (req, res) => {
     console.log('Estou aqui');
-    const query = 'SELECT * FROM pedidos_detalhes2';
+    const query = 'SELECT * FROM pedidos_detalhes_2';
     connection.query(query, (erro, resultados) => {
         if (erro) {
             console.error('Erro ao consultar pedidos:', erro);
@@ -73,7 +73,7 @@ app.get('/pedidos/view2', (req, res) => {
 
 app.get('/pedidos/view3', (req, res) => {
     console.log('Estou aqui');
-    const query = 'SELECT * FROM vendas_por_cliente';
+    const query = 'SELECT * FROM vendas_por_vliente';
     connection.query(query, (erro, resultado) => {
         if (erro) {
             console.error('Erro ao consultar pedidos:', erro);
